@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مرصد كتب فلسطين 🇵🇸</title>
+<title>مرصد كتب فلسطين | Palestine Books Observatory 🇵🇸</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -18,9 +18,7 @@ body{font-family:'Segoe UI','Cairo',Tahoma,Arial,sans-serif;background:var(--bg)
 .hero-c{position:relative;z-index:2}
 .hero h1{font-size:2.5em;font-weight:900;margin-bottom:12px;text-shadow:2px 2px 8px rgba(0,0,0,.3)}
 .hero .sub{font-size:1.2em;opacity:.95;margin-bottom:20px;font-weight:500}
-.hero .info{font-size:.95em;opacity:.9;max-width:800px;margin:0 auto}
-.badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.badges span{padding:8px 20px;border-radius:50px;font-size:.9em;font-weight:700;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);backdrop-filter:blur(8px)}
+.hero .info{font-size:.95em;opacity:.9;max-width:800px;margin:0 auto;line-height:1.8}
 .stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:1400px;margin:-35px auto 30px;padding:0 20px;position:relative;z-index:10}
 .stat-card{background:var(--card);border-radius:var(--radius);padding:22px 16px;text-align:center;box-shadow:var(--shadow);border-top:4px solid var(--red);transition:transform .3s}
 .stat-card:hover{transform:translateY(-4px)}
@@ -53,10 +51,6 @@ body{font-family:'Segoe UI','Cairo',Tahoma,Arial,sans-serif;background:var(--bg)
 .ptrack{height:6px;background:#e0e0e0;border-radius:6px;overflow:hidden}
 .pfill{height:100%;background:linear-gradient(90deg,var(--red),var(--green));border-radius:6px;transition:width .5s;width:0}
 .ptxt{font-size:.8em;color:var(--text2);margin-top:6px;text-align:center;font-weight:600}
-.debug-panel{max-width:1400px;margin:0 auto 20px;padding:0 20px;display:none}
-.debug-panel.show{display:block}
-.debug-log{background:#1a1a1a;color:#0f0;padding:16px;border-radius:12px;font-family:'Courier New',monospace;font-size:.78em;max-height:300px;overflow-y:auto;direction:ltr;text-align:left;line-height:1.8}
-.debug-toggle{padding:8px 20px;border-radius:50px;border:2px solid #e0e0e0;background:#fff;cursor:pointer;font-size:.85em;font-weight:600}
 .books-grid{max-width:1400px;margin:0 auto;padding:0 20px 50px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
 .book-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border-top:4px solid var(--red);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
 .book-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.15)}
@@ -96,22 +90,19 @@ footer p{font-size:.95em;opacity:.85;margin-bottom:8px;line-height:1.8}
 </style>
 </head>
 <body>
+
+<!-- ══════════ الترويسة ══════════ -->
 <div class="hero">
   <div class="hero-c">
-    <h1>🇵🇸 مرصد كتب فلسطين</h1>
+    <h1>مرصد كتب فلسطين</h1>
     <p class="sub">Palestine Books Observatory</p>
-    <p class="info">مرصد متخصص يجمع تلقائيا الكتب المتعلقة مباشرة بالقضية الفلسطينية (من 2023)<br>بالعربية والانجليزية والفرنسية - فلترة صارمة للمحتوى</p>
-    <div class="badges">
-      <span>📅 من 2023</span>
-      <span>🔄 تحديث يومي</span>
-      <span>🌍 3 لغات</span>
-      <span>🎯 فلسطين فقط</span>
-    </div>
+    <p class="info">مرصد متخصص يجمع تلقائيا الكتب المتعلقة بالقضية الفلسطينية المنشورة في الثلاث سنوات الاخيرة<br>بالعربية والانجليزية والفرنسية</p>
   </div>
 </div>
 
+<!-- ══════════ الاحصائيات ══════════ -->
 <div class="stats-bar">
-  <div class="stat-card"><div class="icon">📚</div><div class="num" id="sTotal">-</div><div class="lbl">اجمالي</div></div>
+  <div class="stat-card"><div class="icon">📚</div><div class="num" id="sTotal">-</div><div class="lbl">اجمالي الكتب</div></div>
   <div class="stat-card"><div class="icon">🇵🇸</div><div class="num" id="sAr">-</div><div class="lbl">عربي</div></div>
   <div class="stat-card"><div class="icon">🇬🇧</div><div class="num" id="sEn">-</div><div class="lbl">English</div></div>
   <div class="stat-card"><div class="icon">🇫🇷</div><div class="num" id="sFr">-</div><div class="lbl">Francais</div></div>
@@ -119,6 +110,7 @@ footer p{font-size:.95em;opacity:.85;margin-bottom:8px;line-height:1.8}
   <div class="stat-card"><div class="icon">🔍</div><div class="num" id="sSrc">-</div><div class="lbl">مصدر</div></div>
 </div>
 
+<!-- ══════════ الفلاتر ══════════ -->
 <div class="controls">
   <div class="search-row">
     <input type="text" class="search-box" id="searchInput" placeholder="🔍 ابحث عن كتاب، مؤلف، او ناشر..." oninput="filterBooks()">
@@ -129,62 +121,68 @@ footer p{font-size:.95em;opacity:.85;margin-bottom:8px;line-height:1.8}
     <button class="fbtn" onclick="setLang('ar',this)">🇵🇸 عربي</button>
     <button class="fbtn" onclick="setLang('en',this)">🇬🇧 English</button>
     <button class="fbtn" onclick="setLang('fr',this)">🇫🇷 Francais</button>
+
     <span class="filter-label" style="margin-right:20px">الموضوع:</span>
     <select class="sel" id="topicSel" onchange="filterBooks()">
-      <option value="">كل المواضيع</option>
-      <option value="Gaza">غزة</option>
-      <option value="History">التاريخ</option>
-      <option value="Nakba">النكبة</option>
-      <option value="Genocide">الابادة</option>
-      <option value="Occupation">الاحتلال</option>
-      <option value="Resistance">المقاومة</option>
-      <option value="Jerusalem">القدس</option>
-      <option value="Refugees">اللاجئون</option>
-      <option value="International Law">القانون الدولي</option>
-      <option value="Literature">الادب</option>
-      <option value="Apartheid">الابارتهايد</option>
-      <option value="Zionism">الصهيونية</option>
+      <option value="">كل المواضيع - All Topics - Tous les sujets</option>
+      <option value="Gaza">غزة - Gaza - Gaza</option>
+      <option value="History">التاريخ - History - Histoire</option>
+      <option value="Nakba">النكبة - Nakba - Nakba</option>
+      <option value="Genocide">الابادة - Genocide - Genocide</option>
+      <option value="Occupation">الاحتلال - Occupation - Occupation</option>
+      <option value="Resistance">المقاومة - Resistance - Resistance</option>
+      <option value="Jerusalem">القدس - Jerusalem - Jerusalem</option>
+      <option value="Refugees">اللاجئون - Refugees - Refugies</option>
+      <option value="International Law">القانون الدولي - International Law - Droit international</option>
+      <option value="Literature">الادب - Literature - Litterature</option>
+      <option value="Apartheid">الابارتهايد - Apartheid - Apartheid</option>
+      <option value="Zionism">الصهيونية - Zionism - Sionisme</option>
     </select>
-    <span class="filter-label" style="margin-right:20px">ترتيب:</span>
+
+    <span class="filter-label" style="margin-right:20px">الترتيب:</span>
     <select class="sel" id="sortSel" onchange="filterBooks()">
-      <option value="date">الاحدث</option>
-      <option value="title">العنوان</option>
+      <option value="newest">الاحدث - Newest - Plus recent</option>
+      <option value="oldest">الاقدم - Oldest - Plus ancien</option>
+      <option value="rating">التقييم - Rating - Evaluation</option>
+      <option value="most_pages">الاكثر صفحات - Most Pages - Plus de pages</option>
+      <option value="least_pages">الاقل صفحات - Least Pages - Moins de pages</option>
+      <option value="title">العنوان - Title - Titre</option>
     </select>
   </div>
 </div>
 
+<!-- ══════════ شريط التحديث ══════════ -->
 <div class="update-bar">
-  <div class="live"><span class="live-dot"></span><span>تحديث يومي</span></div>
+  <div class="live"><span class="live-dot"></span><span>تحديث يومي تلقائي</span></div>
   <span class="time" id="lastUp">جاري التحميل...</span>
   <button class="rbtn" id="rBtn" onclick="manualRefresh()">🔄 تحديث الان</button>
-  <button class="debug-toggle" onclick="toggleDebug()">🐛 سجل التتبع</button>
 </div>
 
+<!-- ══════════ شريط التقدم ══════════ -->
 <div class="pbar" id="pbar">
   <div class="ptrack"><div class="pfill" id="pfill"></div></div>
   <div class="ptxt" id="ptxt">جاري البحث...</div>
 </div>
 
-<div class="debug-panel" id="debugPanel">
-  <div class="debug-log" id="debugLog"></div>
-</div>
-
+<!-- ══════════ شبكة الكتب ══════════ -->
 <div class="books-grid" id="grid">
   <div class="loader"><div class="spinner"></div><p>جار تحميل الكتب...</p></div>
 </div>
 
+<!-- ══════════ اشعار ══════════ -->
 <div class="notif" id="notif"></div>
 
+<!-- ══════════ Footer ══════════ -->
 <footer>
-  <h3>🇵🇸 مرصد كتب فلسطين</h3>
+  <h3>مرصد كتب فلسطين</h3>
+  <p>Palestine Books Observatory</p>
   <p>يجمع تلقائيا من Google Books, Open Library, Crossref</p>
-  <p>🎯 فقط الكتب المتعلقة مباشرة بفلسطين</p>
-  <p style="font-size:.85em;margin-top:12px">© 2024 - Palestine Books Observatory</p>
+  <p style="font-size:.85em;margin-top:12px">2024 - Palestine Books Observatory</p>
 </footer>
 
 <script>
 // ══════════════════════════════════════════════════════════
-// مرصد كتب فلسطين v8 - مصادر موسعة + ارقام عادية
+// مرصد كتب فلسطين v9
 // ══════════════════════════════════════════════════════════
 
 let ALL_BOOKS=[];
@@ -192,35 +190,26 @@ let currentLang='all';
 let isUpdating=false;
 let activeSources=new Set();
 const DAILY_MS=24*60*60*1000;
-const CACHE_KEY='pbooks_v8';
+const CACHE_KEY='pbooks_v9';
 const MIN_YEAR=2023;
 
-// ★★★ تحويل الارقام الهندية الى عادية ★★★
-function toWesternNums(str){
-  if(!str)return str;
-  return String(str)
-    .replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d))
-    .replace(/[۰-۹]/g,d=>String.fromCharCode(d.charCodeAt(0)-1728));
-}
-
-// تنسيق التاريخ بارقام عادية
+// ★ ارقام عادية
 function fmtDate(dateStr){
-  if(!dateStr)return '';
+  if(!dateStr)return'';
   try{
     const d=new Date(dateStr);
-    if(isNaN(d.getTime()))return '';
+    if(isNaN(d.getTime()))return'';
     const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${months[d.getMonth()]} ${d.getFullYear()}`;
-  }catch(e){return ''}
+    return months[d.getMonth()]+' '+d.getFullYear();
+  }catch(e){return''}
 }
 
-// تنسيق التاريخ والوقت بارقام عادية
 function fmtDateTime(){
   const d=new Date();
   const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const h=String(d.getHours()).padStart(2,'0');
   const m=String(d.getMinutes()).padStart(2,'0');
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}, ${h}:${m}`;
+  return d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear()+', '+h+':'+m;
 }
 
 // ══════════ فلتر فلسطين الصارم ══════════
@@ -288,47 +277,32 @@ function isPalestineBook(title,description,authors){
   const all=tl+' '+dl;
 
   for(const kw of PALESTINE_KEYWORDS){
-    if(tl.includes(kw.toLowerCase()))return{pass:true,reason:'title: "'+kw+'"'};
+    if(tl.includes(kw.toLowerCase()))return{pass:true};
   }
 
-  let hits=0;const found=[];
+  let hits=0;
   for(const kw of PALESTINE_KEYWORDS){
-    if(dl.includes(kw.toLowerCase())){hits++;found.push(kw)}
+    if(dl.includes(kw.toLowerCase()))hits++;
   }
-  if(hits>=2)return{pass:true,reason:'desc: '+found.slice(0,3).join(', ')};
+  if(hits>=2)return{pass:true};
 
   if(/israel|اسرائيل|israel/i.test(tl)){
     for(const kw of SECONDARY_KEYWORDS){
-      if(all.includes(kw.toLowerCase()))return{pass:true,reason:'israel+"'+kw+'"'};
+      if(all.includes(kw.toLowerCase()))return{pass:true};
     }
   }
 
   for(const author of KNOWN_AUTHORS){
     if(al.includes(author)){
       const hasHint=PALESTINE_KEYWORDS.concat(SECONDARY_KEYWORDS).some(kw=>all.includes(kw.toLowerCase()));
-      if(hasHint)return{pass:true,reason:'author: "'+author+'"'};
+      if(hasHint)return{pass:true};
     }
   }
 
-  return{pass:false,reason:'not directly about Palestine'};
+  return{pass:false};
 }
 
-// ══════════ سجل التتبع ══════════
-const debugLines=[];
-function log(msg,type='info'){
-  const t=new Date().toLocaleTimeString('en-US',{hour12:false});
-  const p=type==='error'?'X':type==='success'?'OK':type==='warn'?'!!':type==='filter'?'--':'..';
-  const line=`[${t}] ${p} ${msg}`;
-  debugLines.push(line);
-  console.log(line);
-  const el=document.getElementById('debugLog');
-  if(el){el.textContent=debugLines.slice(-200).join('\n');el.scrollTop=el.scrollHeight}
-}
-function toggleDebug(){document.getElementById('debugPanel').classList.toggle('show')}
-
-// ══════════════════════════════════════════════════════════
-// ★★★ استعلامات موسعة - خاصة الفرنسية والعربية ★★★
-// ══════════════════════════════════════════════════════════
+// ══════════ استعلامات موسعة ══════════
 
 const QUERIES={
   en:[
@@ -358,42 +332,31 @@ const QUERIES={
     "oslo accords failure","palestinian statehood",
     "UN palestine","UNRWA palestine",
   ],
-
-  // ★★★ فرنسية موسعة بشكل كبير ★★★
   fr:[
-    // عام فلسطين
     "palestine livre 2024","palestine livre 2023","palestine livre 2025",
     "question palestinienne livre","conflit israelo-palestinien livre",
     "cause palestinienne","peuple palestinien",
-    // غزة
     "gaza guerre livre 2024","gaza genocide 2024","gaza bombardement",
     "guerre gaza 2023 livre","blocus gaza livre","siege gaza",
     "gaza crise humanitaire","gaza famine 2024",
     "7 octobre hamas livre","7 octobre 2023",
-    // تاريخ
     "histoire palestine livre","histoire palestinienne",
     "nakba 1948 livre","nakba palestine",
     "mandat britannique palestine","creation israel 1948",
-    // احتلال واستيطان
     "occupation israelienne livre","colonies israeliennes",
     "colonisation israelienne","apartheid israelien livre",
     "nettoyage ethnique palestine","mur separation palestine",
-    // مقاومة ولاجئين
     "resistance palestinienne livre","intifada livre",
     "refugies palestiniens livre","droit retour palestinien",
     "UNRWA livre","camps refugies palestiniens",
-    // القدس
     "jerusalem livre","al-quds livre","mosquee al-aqsa",
     "jerusalem orientale occupation",
-    // قانون دولي
     "droit international palestine","CIJ genocide israel",
     "CPI crimes guerre israel","crimes guerre gaza",
     "genocide gaza droit international",
-    // BDS وسياسة
     "BDS palestine boycott","boycott israel livre",
     "solidarite palestine","sionisme colonialisme livre",
     "antisionisme livre","sionisme histoire critique",
-    // مؤلفون فرنسيون
     "elias sanbar palestine","jean-pierre filiu gaza",
     "alain gresh palestine","dominique vidal palestine",
     "sylvain cypel israel","henry laurens palestine",
@@ -401,66 +364,52 @@ const QUERIES={
     "rene backmann mur israel","pierre stambul palestine",
     "thomas vescovi palestine","rachid benzine",
     "shlomo sand invention","ilan pappe nettoyage",
-    // ادب ثقافة
     "litterature palestinienne","mahmoud darwich poesie",
     "ghassan kanafani livre","cinema palestinien",
     "culture palestinienne","art palestinien",
     "poesie palestinienne","roman palestinien",
-    // ناشرون فرنسيون
     "palestine la decouverte","palestine editions fabrique",
     "palestine actes sud","palestine karthala",
     "palestine sindbad","palestine CNRS editions",
     "palestine puf","palestine seuil",
     "palestine fayard","palestine libertalia",
-    // مواضيع خاصة
     "eau palestine","agriculture palestine",
     "femmes palestiniennes","prisonniers palestiniens",
     "enfants gaza","hopitaux gaza",
     "nakba continue","depossession palestine",
     "societe civile palestinienne","diaspora palestinienne",
   ],
-
-  // ★★★ عربية موسعة بشكل كبير ★★★
   ar:[
-    // عام
     "فلسطين كتاب 2024","فلسطين كتاب 2023","فلسطين كتاب 2025",
     "القضية الفلسطينية كتاب","الصراع العربي الاسرائيلي",
     "تاريخ فلسطين الحديث","فلسطين التاريخ والجغرافيا",
-    // غزة
     "غزة حرب 2024","غزة حرب 2023","غزة ابادة كتاب",
     "العدوان على غزة","حصار غزة كتاب",
     "غزة الكارثة الانسانية","غزة المجاعة",
     "غزة الحرب والمقاومة","قطاع غزة",
     "طوفان الاقصى كتاب","طوفان الاقصى 2023",
     "السابع من اكتوبر","عملية طوفان الاقصى",
-    // نكبة
     "النكبة الفلسطينية كتاب","نكبة 1948",
     "التطهير العرقي فلسطين","تهجير الفلسطينيين",
     "المجازر الصهيونية","دير ياسين",
-    // احتلال واستيطان
     "الاحتلال الاسرائيلي كتاب","الاستيطان الصهيوني كتاب",
     "المستوطنات الاسرائيلية","جدار الفصل العنصري",
     "الضفة الغربية كتاب","الاغوار الفلسطينية",
     "الابارتهايد الاسرائيلي","نظام الفصل العنصري",
-    // القدس
     "القدس المحتلة كتاب","القدس تاريخ",
     "المسجد الاقصى كتاب","تهويد القدس",
     "القدس العربية","البلدة القديمة القدس",
-    // مقاومة
     "المقاومة الفلسطينية كتاب","حركة حماس كتاب",
     "الجهاد الاسلامي فلسطين","كتائب القسام",
     "المقاومة المسلحة فلسطين","الانتفاضة الفلسطينية",
     "الانتفاضة الاولى","الانتفاضة الثانية",
     "الكفاح الفلسطيني","النضال الفلسطيني",
-    // لاجئون وعودة
     "اللاجئون الفلسطينيون كتاب","حق العودة كتاب",
     "مخيمات اللاجئين الفلسطينيين","الاونروا",
     "الشتات الفلسطيني","المهجر الفلسطيني",
-    // قانون دولي
     "جرائم الحرب الاسرائيلية كتاب","محكمة العدل الدولية فلسطين",
     "المحكمة الجنائية الدولية اسرائيل","القانون الدولي فلسطين",
     "الابادة الجماعية غزة","جرائم ضد الانسانية اسرائيل",
-    // ادب وثقافة
     "الادب الفلسطيني كتاب","محمود درويش كتاب",
     "غسان كنفاني كتاب","الشعر الفلسطيني",
     "الرواية الفلسطينية","السينما الفلسطينية",
@@ -468,13 +417,11 @@ const QUERIES={
     "الفن الفلسطيني","المسرح الفلسطيني",
     "ادب المقاومة","سميح القاسم","توفيق زياد",
     "فدوى طوقان","ادوارد سعيد",
-    // فكر وسياسة
     "الصهيونية كتاب","تاريخ الصهيونية",
     "الاستعمار الاستيطاني فلسطين","الحركة الوطنية الفلسطينية",
     "منظمة التحرير الفلسطينية","اتفاقيات اوسلو",
     "السلطة الفلسطينية","الدولة الفلسطينية",
     "حل الدولتين","حل الدولة الواحدة",
-    // مؤلفون عرب
     "ايلان بابه كتاب","نورمان فينكلشتاين كتاب",
     "نعوم تشومسكي فلسطين","رشيد الخالدي كتاب",
     "نور مصالحة كتاب","عبد الوهاب المسيري",
@@ -482,13 +429,11 @@ const QUERIES={
     "سلمان ابو ستة","الياس خوري كتاب",
     "عبد الباري عطوان","مصطفى البرغوثي",
     "ماهر الشريف","خليل السكاكيني",
-    // ناشرون عرب
     "فلسطين مؤسسة الدراسات الفلسطينية",
     "فلسطين المركز العربي للابحاث",
     "فلسطين مركز دراسات الوحدة العربية",
     "فلسطين دار الشروق","فلسطين دار الاداب",
     "فلسطين دار الساقي","فلسطين دار الفارابي",
-    // مواضيع خاصة
     "المراة الفلسطينية","الاسرى الفلسطينيون",
     "اطفال فلسطين","التعليم في فلسطين",
     "الاقتصاد الفلسطيني","المياه فلسطين",
@@ -513,9 +458,9 @@ function detectTopics(title,desc){
     [/غز|gaza/i,'Gaza'],[/نكب|nakba/i,'Nakba'],
     [/اباد|genocide|genocid/i,'Genocide'],[/احتلال|occupation/i,'Occupation'],
     [/مقاوم|resistance|résistance/i,'Resistance'],[/تاريخ|history|histoire/i,'History'],
-    [/قدس|jerusalem|jérusalem/i,'Jerusalem'],[/لاج|refugee|réfugié/i,'Refugees'],
+    [/قدس|jerusalem|jérusalem/i,'Jerusalem'],[/لاج|refugee|réfugié|refugie/i,'Refugees'],
     [/قانون.*دول|international.law|droit.inter/i,'International Law'],
-    [/ادب|literature|littérature/i,'Literature'],
+    [/ادب|literature|littérature|litterature/i,'Literature'],
     [/حقوق|human.right|droits/i,'Human Rights'],
     [/ابارتهايد|apartheid/i,'Apartheid'],[/صهيون|zionism|sionisme/i,'Zionism'],
     [/استيطان|settlement|coloni/i,'Settlements'],[/انتفاض|intifada/i,'Intifada'],
@@ -553,28 +498,21 @@ function dedup(books){
     if(dup)continue;
     titles.push(nt);out.push(b);
   }
-  log(`Dedup: ${books.length} -> ${out.length}`);
   return out;
 }
 
-// ══════════════════════════════════════════════════════════
-// Google Books
-// ══════════════════════════════════════════════════════════
+// ══════════ Google Books ══════════
 async function fetchGoogle(query,langRestrict){
   const books=[];
   try{
     const params=new URLSearchParams({q:query,printType:'books',orderBy:'newest',maxResults:'40'});
     if(langRestrict==='ar'||langRestrict==='fr')params.set('langRestrict',langRestrict);
-    const url=`https://www.googleapis.com/books/v1/volumes?${params}`;
-    log(`Google: "${query}" [${langRestrict||'any'}]`);
-
-    const resp=await fetch(url);
-    if(resp.status===429){log('Google: Rate limit!','warn');await sleep(5000);return books}
-    if(!resp.ok){log(`Google: HTTP ${resp.status}`,'error');return books}
+    const resp=await fetch(`https://www.googleapis.com/books/v1/volumes?${params}`);
+    if(resp.status===429){await sleep(5000);return books}
+    if(!resp.ok)return books;
 
     const data=await resp.json();
     const items=data.items||[];
-    let ok=0,no=0;
 
     for(const item of items){
       try{
@@ -585,14 +523,12 @@ async function fetchGoogle(query,langRestrict){
         const pubDate=v.publishedDate||'';
         let year=0;
         if(pubDate)year=parseInt(pubDate.substring(0,4));
-        if(year>0&&year<MIN_YEAR){no++;continue}
-        if(!year){no++;continue}
+        if(year>0&&year<MIN_YEAR)continue;
+        if(!year)continue;
 
         const desc=(v.description||'').substring(0,500);
         const authors=v.authors||[];
-
-        const check=isPalestineBook(title+(v.subtitle?': '+v.subtitle:''),desc,authors);
-        if(!check.pass){no++;continue}
+        if(!isPalestineBook(title+(v.subtitle?': '+v.subtitle:''),desc,authors).pass)continue;
 
         const lang=v.language==='ar'?'ar':v.language==='fr'?'fr':detectLang(title);
         const isbns=v.industryIdentifiers||[];
@@ -611,42 +547,32 @@ async function fetchGoogle(query,langRestrict){
           source:'Google Books',rating:v.averageRating||null,
           addedAt:Date.now()
         });
-        ok++;
       }catch(e){}
     }
-    log(`Google: "${query.substring(0,25)}" => ${ok} ok, ${no} rejected`,ok>0?'success':'warn');
-    if(ok>0)activeSources.add('Google Books');
-  }catch(e){log(`Google err: ${e.message}`,'error')}
+    if(books.length>0)activeSources.add('Google Books');
+  }catch(e){}
   return books;
 }
 
-// ══════════════════════════════════════════════════════════
-// Open Library
-// ══════════════════════════════════════════════════════════
+// ══════════ Open Library ══════════
 async function fetchOpenLib(query){
   const books=[];
   try{
-    const params=new URLSearchParams({q:query,limit:'30',sort:'new'});
-    log(`OpenLib: "${query}"`);
-    const resp=await fetch(`https://openlibrary.org/search.json?${params}`);
-    if(!resp.ok){log(`OpenLib: HTTP ${resp.status}`,'error');return books}
+    const resp=await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=30&sort=new`);
+    if(!resp.ok)return books;
     const data=await resp.json();
-    const docs=data.docs||[];
-    let ok=0,no=0;
 
-    for(const doc of docs){
+    for(const doc of(data.docs||[])){
       try{
         const title=doc.title||'';
         if(!title)continue;
         const year=doc.first_publish_year||0;
-        if(year>0&&year<MIN_YEAR){no++;continue}
-        if(!year){no++;continue}
+        if(year>0&&year<MIN_YEAR)continue;
+        if(!year)continue;
 
         const subjects=(doc.subject||[]).join(' ');
         const authors=doc.author_name||[];
-
-        const check=isPalestineBook(title,subjects,authors);
-        if(!check.pass){no++;continue}
+        if(!isPalestineBook(title,subjects,authors).pass)continue;
 
         const coverId=doc.cover_i;
         books.push({
@@ -661,18 +587,14 @@ async function fetchOpenLib(query){
           topics:detectTopics(title,subjects),
           source:'Open Library',rating:null,addedAt:Date.now()
         });
-        ok++;
       }catch(e){}
     }
-    log(`OpenLib: "${query.substring(0,25)}" => ${ok} ok, ${no} rej`,ok>0?'success':'warn');
-    if(ok>0)activeSources.add('Open Library');
-  }catch(e){log(`OpenLib err: ${e.message}`,'error')}
+    if(books.length>0)activeSources.add('Open Library');
+  }catch(e){}
   return books;
 }
 
-// ══════════════════════════════════════════════════════════
-// Crossref
-// ══════════════════════════════════════════════════════════
+// ══════════ Crossref ══════════
 async function fetchCrossref(query){
   const books=[];
   try{
@@ -680,28 +602,23 @@ async function fetchCrossref(query){
       query,filter:'type:book,from-pub-date:2023-01-01',
       rows:'20',sort:'published',order:'desc'
     });
-    log(`Crossref: "${query}"`);
     const resp=await fetch(`https://api.crossref.org/works?${params}`,{
       headers:{'User-Agent':'PalestineBooks/2.0 (mailto:r@example.com)'}
     });
-    if(!resp.ok){log(`Crossref: HTTP ${resp.status}`,'error');return books}
+    if(!resp.ok)return books;
     const data=await resp.json();
-    const items=(data.message&&data.message.items)||[];
-    let ok=0,no=0;
 
-    for(const item of items){
+    for(const item of((data.message&&data.message.items)||[])){
       try{
         const title=(item.title||[])[0]||'';
         if(!title)continue;
         const authors=(item.author||[]).map(a=>`${a.given||''} ${a.family||''}`.trim());
-
-        const check=isPalestineBook(title,(item.subject||[]).join(' '),authors);
-        if(!check.pass){no++;continue}
+        if(!isPalestineBook(title,(item.subject||[]).join(' '),authors).pass)continue;
 
         const dp=(item['published-print']&&item['published-print']['date-parts']&&item['published-print']['date-parts'][0])||
                  (item['published-online']&&item['published-online']['date-parts']&&item['published-online']['date-parts'][0]);
         const yr=dp?dp[0]:0;
-        if(yr>0&&yr<MIN_YEAR){no++;continue}
+        if(yr>0&&yr<MIN_YEAR)continue;
         const pubDate=dp?`${dp[0]}-${String(dp[1]||1).padStart(2,'0')}-${String(dp[2]||1).padStart(2,'0')}`:'2024-01-01';
 
         books.push({
@@ -716,20 +633,16 @@ async function fetchCrossref(query){
           topics:detectTopics(title,(item.subject||[]).join(' ')),
           source:'Crossref',rating:null,addedAt:Date.now()
         });
-        ok++;
       }catch(e){}
     }
-    log(`Crossref: "${query.substring(0,25)}" => ${ok} ok, ${no} rej`,ok>0?'success':'warn');
-    if(ok>0)activeSources.add('Crossref');
-  }catch(e){log(`Crossref err: ${e.message}`,'error')}
+    if(books.length>0)activeSources.add('Crossref');
+  }catch(e){}
   return books;
 }
 
-// ══════════════════════════════════════════════════════════
-// المحرك الرئيسي
-// ══════════════════════════════════════════════════════════
+// ══════════ المحرك الرئيسي ══════════
 async function fetchAllBooks(){
-  if(isUpdating){log('Already updating','warn');return}
+  if(isUpdating)return;
   isUpdating=true;
   activeSources.clear();
   const prevCount=ALL_BOOKS.length;
@@ -741,25 +654,15 @@ async function fetchAllBooks(){
     document.getElementById('grid').innerHTML='<div class="loader"><div class="spinner"></div><p>جار جلب الكتب...</p></div>';
   }
 
-  log('========================================');
-  log('Start fetching - strict filter - from 2023');
-  log(`EN: ${QUERIES.en.length} queries, FR: ${QUERIES.fr.length} queries, AR: ${QUERIES.ar.length} queries`);
-  log('========================================');
-
   const newBooks=[];
   const tasks=[];
 
-  // ★ Google Books - الثلاث لغات
   for(const q of QUERIES.en)tasks.push({api:'google',q,lang:'en'});
   for(const q of QUERIES.fr)tasks.push({api:'google',q,lang:'fr'});
   for(const q of QUERIES.ar)tasks.push({api:'google',q,lang:'ar'});
-
-  // ★ Open Library - الثلاث لغات (موسع)
   for(const q of QUERIES.en.slice(0,15))tasks.push({api:'openlib',q,lang:'en'});
   for(const q of QUERIES.fr.slice(0,15))tasks.push({api:'openlib',q,lang:'fr'});
   for(const q of QUERIES.ar.slice(0,15))tasks.push({api:'openlib',q,lang:'ar'});
-
-  // ★ Crossref - انجليزي + فرنسي
   for(const q of QUERIES.en.slice(0,10))tasks.push({api:'crossref',q,lang:'en'});
   for(const q of QUERIES.fr.slice(0,8))tasks.push({api:'crossref',q,lang:'fr'});
 
@@ -770,14 +673,14 @@ async function fetchAllBooks(){
     done++;
     const pct=Math.round((done/total)*100);
     document.getElementById('pfill').style.width=pct+'%';
-    document.getElementById('ptxt').textContent=`${pct}% - ${task.api} [${task.lang}]: ${task.q.substring(0,30)}...`;
+    document.getElementById('ptxt').textContent=pct+'% - '+task.api+' ['+task.lang+']: '+task.q.substring(0,30)+'...';
 
     let result=[];
     try{
       if(task.api==='google')result=await fetchGoogle(task.q,task.lang);
       else if(task.api==='openlib')result=await fetchOpenLib(task.q);
       else if(task.api==='crossref')result=await fetchCrossref(task.q);
-    }catch(e){log(`Error ${task.api}: ${e.message}`,'error')}
+    }catch(e){}
 
     if(result.length>0)newBooks.push(...result);
 
@@ -785,23 +688,17 @@ async function fetchAllBooks(){
     await sleep(delay);
   }
 
-  log('========================================');
-  log(`Fetch done: ${newBooks.length} new books passed filter`);
-
   const combined=[...ALL_BOOKS,...newBooks];
   ALL_BOOKS=dedup(combined);
   ALL_BOOKS.sort((a,b)=>new Date(b.publication_date)-new Date(a.publication_date));
 
   const addedCount=ALL_BOOKS.length-prevCount;
-  log(`Result: ${prevCount} -> ${ALL_BOOKS.length} (+${Math.max(0,addedCount)})`,'success');
-  log(`Sources: ${[...activeSources].join(', ')}`);
 
   try{
     localStorage.setItem(CACHE_KEY,JSON.stringify({
       books:ALL_BOOKS,timestamp:Date.now(),sources:[...activeSources]
     }));
-    log('Saved to cache','success');
-  }catch(e){log('Cache save error: '+e.message,'error')}
+  }catch(e){}
 
   document.getElementById('pbar').style.display='none';
   document.getElementById('rBtn').disabled=false;
@@ -809,15 +706,13 @@ async function fetchAllBooks(){
 
   updateStats();filterBooks();updateTime();
 
-  if(addedCount>0&&prevCount>0)showNotif(`تم اضافة ${addedCount} كتاب جديد عن فلسطين!`);
+  if(addedCount>0&&prevCount>0)showNotif('تم اضافة '+addedCount+' كتاب جديد!');
 }
 
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 function showNotif(msg){const el=document.getElementById('notif');el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',5000)}
 
-// ══════════════════════════════════════════════════════════
-// الفلترة والعرض
-// ══════════════════════════════════════════════════════════
+// ══════════ الفلترة والترتيب ══════════
 function setLang(lang,btn){
   currentLang=lang;
   document.querySelectorAll('.fbtn').forEach(b=>b.className='fbtn');
@@ -840,8 +735,28 @@ function filterBooks(){
     return true;
   });
 
-  if(sort==='title')list.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
-  else list.sort((a,b)=>new Date(b.publication_date)-new Date(a.publication_date));
+  // ★ ترتيب متعدد الخيارات
+  switch(sort){
+    case 'newest':
+      list.sort((a,b)=>new Date(b.publication_date)-new Date(a.publication_date));
+      break;
+    case 'oldest':
+      list.sort((a,b)=>new Date(a.publication_date)-new Date(b.publication_date));
+      break;
+    case 'rating':
+      list.sort((a,b)=>(b.rating||0)-(a.rating||0));
+      break;
+    case 'most_pages':
+      list.sort((a,b)=>(b.pages||0)-(a.pages||0));
+      break;
+    case 'least_pages':
+      list.sort((a,b)=>(a.pages||0)-(b.pages||0));
+      break;
+    case 'title':
+      list.sort((a,b)=>a.title.localeCompare(b.title,'ar'));
+      break;
+  }
+
   renderBooks(list);
 }
 
@@ -855,62 +770,55 @@ function renderBooks(books){
     return;
   }
   if(!books.length){
-    grid.innerHTML=`<div class="no-res"><div class="emoji">📚</div><p>لا توجد كتب مطابقة</p><p style="font-size:.9em;margin-top:8px;opacity:.7">جرب تغيير الفلتر</p></div>`;
+    grid.innerHTML='<div class="no-res"><div class="emoji">📚</div><p>لا توجد كتب مطابقة</p><p style="font-size:.9em;margin-top:8px;opacity:.7">جرب تغيير الفلتر</p></div>';
     return;
   }
 
   const hotTopics=['Nakba','Gaza','Genocide','Occupation','Resistance','Hamas','Ethnic Cleansing','Prisoners'];
 
   grid.innerHTML=books.map(b=>{
-    const lc=`l-${b.language}`;
+    const lc='l-'+b.language;
     const ll=b.language==='ar'?'عربي':b.language==='fr'?'Francais':'English';
-
-    // ★ تاريخ بارقام عادية
     const date=fmtDate(b.publication_date);
-
-    // ★ صفحات بارقام عادية
     const pagesStr=b.pages?String(b.pages):'';
     const ratingStr=b.rating?b.rating.toFixed(1):'';
 
     const coverHTML=b.cover
-      ?`<img src="${b.cover}" alt="${esc(b.title)}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/150x200/1a1a1a/ffffff?text=PS'">`
-      :`<div style="width:130px;height:180px;background:linear-gradient(135deg,#c8102e,#007a3d);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:4em">🇵🇸</div>`;
+      ?'<img src="'+b.cover+'" alt="'+esc(b.title)+'" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML=\'<div style=\\\'width:130px;height:180px;background:linear-gradient(135deg,#c8102e,#007a3d);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:4em;position:relative;z-index:2\\\'>🇵🇸</div>\'">'
+      :'<div style="width:130px;height:180px;background:linear-gradient(135deg,#c8102e,#007a3d);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:4em;position:relative;z-index:2">🇵🇸</div>';
 
     const tagsHTML=b.topics.slice(0,5).map(t=>
-      `<span class="tag ${hotTopics.some(h=>t.includes(h))?'hot':''}">${esc(t)}</span>`
+      '<span class="tag '+(hotTopics.some(h=>t.includes(h))?'hot':'')+'">'+esc(t)+'</span>'
     ).join('');
 
-    return`
-    <div class="book-card">
-      <div class="cover-wrap">
-        ${coverHTML}
-        <span class="lang-badge ${lc}">${ll}</span>
-        <span class="src-badge">${esc(b.source)}</span>
-      </div>
-      <div class="book-body" dir="rtl">
-        <div class="book-title">${esc(b.title)}</div>
-        <div class="book-author">✍ ${esc(b.authors.slice(0,3).join(', ')||'غير محدد')}</div>
-        <div class="book-pub">🏛 ${esc(b.publisher||'غير محدد')}</div>
-        <div class="book-meta">
-          ${date?`<span>📅 ${date}</span>`:''}
-          ${pagesStr?`<span>📄 ${pagesStr} p</span>`:''}
-          ${ratingStr?`<span>⭐ ${ratingStr}</span>`:''}
-          ${b.isbn?`<span>📋 ISBN</span>`:''}
-        </div>
-        <div class="topics">${tagsHTML}</div>
-        ${b.description?`<div class="book-desc">${esc(b.description)}</div>`:''}
-        <div class="book-actions">
-          ${b.book_url?`<a href="${esc(b.book_url)}" target="_blank" rel="noopener" class="blink bp">🔗 رابط الكتاب</a>`:''}
-          ${b.isbn?`<a href="https://www.worldcat.org/isbn/${b.isbn}" target="_blank" rel="noopener" class="blink bs">📚 WorldCat</a>`:''}
-        </div>
-      </div>
-    </div>`;
+    return '<div class="book-card">'+
+      '<div class="cover-wrap">'+
+        coverHTML+
+        '<span class="lang-badge '+lc+'">'+ll+'</span>'+
+        '<span class="src-badge">'+esc(b.source)+'</span>'+
+      '</div>'+
+      '<div class="book-body" dir="rtl">'+
+        '<div class="book-title">'+esc(b.title)+'</div>'+
+        '<div class="book-author">'+esc(b.authors.slice(0,3).join(', ')||'غير محدد')+'</div>'+
+        '<div class="book-pub">'+esc(b.publisher||'غير محدد')+'</div>'+
+        '<div class="book-meta">'+
+          (date?'<span>📅 '+date+'</span>':'')+
+          (pagesStr?'<span>📄 '+pagesStr+' p</span>':'')+
+          (ratingStr?'<span>⭐ '+ratingStr+'</span>':'')+
+          (b.isbn?'<span>📋 ISBN</span>':'')+
+        '</div>'+
+        '<div class="topics">'+tagsHTML+'</div>'+
+        (b.description?'<div class="book-desc">'+esc(b.description)+'</div>':'')+
+        '<div class="book-actions">'+
+          (b.book_url?'<a href="'+esc(b.book_url)+'" target="_blank" rel="noopener" class="blink bp">🔗 رابط الكتاب</a>':'')+
+          (b.isbn?'<a href="https://www.worldcat.org/isbn/'+b.isbn+'" target="_blank" rel="noopener" class="blink bs">📚 WorldCat</a>':'')+
+        '</div>'+
+      '</div>'+
+    '</div>';
   }).join('');
 }
 
-// ══════════════════════════════════════════════════════════
-// الاحصائيات - ★ ارقام عادية
-// ══════════════════════════════════════════════════════════
+// ══════════ الاحصائيات ══════════
 function updateStats(){
   document.getElementById('sTotal').textContent=String(ALL_BOOKS.length);
   document.getElementById('sAr').textContent=String(ALL_BOOKS.filter(b=>b.language==='ar').length);
@@ -921,25 +829,17 @@ function updateStats(){
 }
 
 function updateTime(){
-  // ★ ارقام عادية - بدون toLocaleString العربي
   document.getElementById('lastUp').textContent='اخر تحديث: '+fmtDateTime();
 }
 
 function manualRefresh(){
-  log('Manual refresh');
-  // مسح الكاش لبداية نظيفة عند التحديث اليدوي
   localStorage.removeItem(CACHE_KEY);
   ALL_BOOKS=[];
   fetchAllBooks();
 }
 
-// ══════════════════════════════════════════════════════════
-// نقطة البداية
-// ══════════════════════════════════════════════════════════
+// ══════════ نقطة البداية ══════════
 (async function init(){
-  log('Palestine Books Observatory v8 - Extended sources');
-  log(`Queries: EN=${QUERIES.en.length} FR=${QUERIES.fr.length} AR=${QUERIES.ar.length}`);
-
   try{
     const raw=localStorage.getItem(CACHE_KEY);
     if(raw){
@@ -948,27 +848,21 @@ function manualRefresh(){
         ALL_BOOKS=cache.books;
         if(cache.sources)cache.sources.forEach(s=>activeSources.add(s));
         updateStats();filterBooks();updateTime();
-        log(`Loaded ${ALL_BOOKS.length} books from cache`,'success');
 
         const elapsed=Date.now()-(cache.timestamp||0);
         if(elapsed<DAILY_MS){
-          const hrs=Math.round((DAILY_MS-elapsed)/3600000);
-          log(`Next update in ~${hrs}h`);
           setTimeout(()=>fetchAllBooks(),DAILY_MS-elapsed);
           return;
         }
-        log('24h passed, updating in background...');
         fetchAllBooks();
         return;
       }
     }
-  }catch(e){log('Cache read error: '+e.message,'error')}
-
-  log('No cache, fetching from scratch...');
+  }catch(e){}
   await fetchAllBooks();
 })();
 
-setInterval(()=>{log('Daily auto-update');fetchAllBooks()},DAILY_MS);
+setInterval(()=>fetchAllBooks(),DAILY_MS);
 </script>
 </body>
 </html>
